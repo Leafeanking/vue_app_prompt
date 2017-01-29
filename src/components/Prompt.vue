@@ -1,11 +1,28 @@
 <template>
   <div class="prompt">
-    <button
-      @click="getNewPrompt">
-      Prompt Me!
-    </button>
-    <h1>{{ currentPrompt.name }}</h1>
-    <p>{{ currentPrompt.description }}</p>
+
+    <md-layout md-gutter md-column md-flex md-align="center">
+      <md-layout md-align="center">
+        <md-button
+          class="md-raised md-accent"
+          @click="getNewPrompt">
+          Prompt Me
+        </md-button>
+      </md-layout>
+
+      <md-layout><!-- spacer -->&nbsp;</md-layout>
+
+      <md-layout md-align="center">
+        <md-card md-card>
+          <md-card-header>
+            <div class="md-title">{{ currentPrompt.name }}</div>
+          </md-card-header>
+          <md-card-content v-if="currentPrompt.description">
+            <p>{{ currentPrompt.description }}</p>
+          </md-card-content>
+        </md-card>
+      </md-layout>
+    </md-layout>
   </div>
 </template>
 

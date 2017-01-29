@@ -5,12 +5,27 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    currentPrompt: {}
+    currentPrompt: {},
+    authToken: window.sessionStorage.getItem('token'),
+    user: JSON.parse(window.sessionStorage.getItem('user'))
   },
   mutations: {
     setCurrentPrompt: function (state, prompt) {
       console.log('prompt', prompt)
       state.currentPrompt = prompt
+    },
+    setAuthToken: function (state, token) {
+      state.authToken = token
+      window.sessionStorage.setItem('token', token)
+    },
+    setUser: function (state, user) {
+      state.user = user
+      window.sessionStorage.setItem('user', JSON.stringify(user))
+    },
+    logout: function (state) {
+      state.authToken = ''
+      state.user = {}
+      window.sessionStorage.clear()
     }
   },
   actions: {
@@ -24,6 +39,13 @@ export default new Vuex.Store({
           // error
         }
       )
+    },
+    getAuthToken: function (context, formData) {
+    }
+  },
+  getters: {
+    userName: function (state) {
+      return state.user ? state.user.username : ''
     }
   }
 })

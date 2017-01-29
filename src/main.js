@@ -2,10 +2,14 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import VueResource from 'vue-resource'
-import store from './store'
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.css'
 import App from './App'
+import store from './store'
+import router from './router'
 
 Vue.use(VueResource)
+Vue.use(VueMaterial)
 
 Vue.http.options.emulateJSON = true
 Vue.http.options.emulateHTTP = true
@@ -16,10 +20,10 @@ new Vue({
   template: '<App/>',
   components: { App },
   store,
+  router,
   http: {
-    root: '/root',
     headers: {
-      Authorization: 'Basic YXBpOnBhc3N3b3Jk'
+      Token: store.state.token
     }
   }
 
