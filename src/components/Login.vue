@@ -36,7 +36,7 @@ export default {
   name: 'Login',
   mounted: function () {},
   computed: {},
-  data () {
+  data: function () {
     return {
       username: '',
       password: '',

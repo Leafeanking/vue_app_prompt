@@ -10,26 +10,36 @@ export default new Vuex.Store({
     user: JSON.parse(window.sessionStorage.getItem('user'))
   },
   mutations: {
-    setCurrentPrompt: function (state, prompt) {
+    setCurrentPrompt: (state, prompt) => {
       console.log('prompt', prompt)
       state.currentPrompt = prompt
     },
-    setAuthToken: function (state, token) {
+    setAuthToken: (state, token) => {
       state.authToken = token
       window.sessionStorage.setItem('token', token)
     },
-    setUser: function (state, user) {
+    setUser: (state, user) => {
       state.user = user
       window.sessionStorage.setItem('user', JSON.stringify(user))
     },
-    logout: function (state) {
+    updateUserPrompt: (state, prompt) => {
+      let prompts = state.user ? state.user.prompts : []
+      for (let i = 0; i < prompts.length; i++) {
+        if (prompts[i].id === prompt.id) {
+          prompts[i] = prompt
+          return
+        }
+      }
+      prompts.push(prompt)
+    },
+    logout: (state) => {
       state.authToken = ''
       state.user = {}
       window.sessionStorage.clear()
     }
   },
   actions: {
-    getRandomPrompt: function (context) {
+    getRandomPrompt: (context) => {
       Vue.http.get('http://localhost:8000/api/prompts/random/').then(
         function (response) {
           console.log(response)
@@ -44,8 +54,14 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    userName: function (state) {
+    userName: (state) => {
       return state.user ? state.user.username : ''
+    },
+    userPrompts: (state) => {
+      return state.user ? state.user.prompts : []
+    },
+    userPromptById: (state, getters) => (id) => {
+      return getters.userPrompts.find(prompt => prompt.id.toString() === id)
     }
   }
 })

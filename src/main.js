@@ -23,7 +23,7 @@ new Vue({
   router,
   http: {
     headers: {
-      Token: store.state.token
+      Authorization: `Token ${store.state.authToken}`
     }
   }
 

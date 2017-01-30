@@ -37,7 +37,7 @@ export default {
       return this.$store.state.currentPrompt
     }
   },
-  data () {
+  data: function () {
     return {}
   },
   methods: {
