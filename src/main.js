@@ -22,6 +22,7 @@ new Vue({
   store,
   router,
   http: {
+    root: process.env.API_ROOT,
     headers: {
       Authorization: `Token ${store.state.authToken}`
     }

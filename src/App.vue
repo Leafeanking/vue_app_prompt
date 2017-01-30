@@ -9,20 +9,21 @@
 
       <h2 class="md-title" @click="goToPrompt">App Prompt Vue Client</h2>
 
-      <span v-if="this.$store.state.authToken" class="pull-right">
+      <span v-if="this.$store.state.authToken">
         Hello {{ username }}
       </span>
 
       <md-button
         v-if="this.$store.state.authToken"
-        @click="logout"
-        class="pull-right">
+        @click="logout">
           Logout
       </md-button>
 
-      <router-link v-else to="/login" class="pull-right">
-          <md-button>Login</md-button>
-      </router-link>
+      <router-link v-else class="white" to="/login">
+      <md-button>
+            Login
+      </md-button>
+    </router-link>
     </md-toolbar>
 
     <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')">
@@ -30,7 +31,7 @@
         <md-list-item>
           <router-link to="/">Prompt Me!</router-link>
         </md-list-item>
-        <div>
+        <div v-if="this.$store.state.authToken">
           <md-list-item>
             <router-link to="/prompts">My Prompts</router-link>
           </md-list-item>
@@ -111,5 +112,8 @@ img{
 /* .slide-fade-leave-active for <2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
+}
+a.white{
+  color: #fff !important;
 }
 </style>

@@ -49,13 +49,11 @@ export default {
   },
   methods: {
     submitPrompt: function () {
-      console.log('submitPrompt')
       if (this.formData.id) {
         // {'token': this.$store.state.authToken}
-        this.$http.put(`http://localhost:8000/api/prompts/${this.formData.id}/`, this.formData, {headers: {Authorization: `Token ${this.$store.state.authToken}`}}).then(
+        this.$http.put(`${process.env.API_ROOT}prompts/${this.formData.id}/`, this.formData, {headers: {Authorization: `Token ${this.$store.state.authToken}`}}).then(
           (response) => {
             // success
-            console.log('success', response)
             this.$store.commit('updateUserPrompt', response.body)
             this.$router.push('/prompts')
           },
@@ -65,11 +63,11 @@ export default {
           }
         )
       } else {
-        this.$http.post(`http://localhost:8000/api/prompts/`, this.formData, {headers: {Authorization: `Token ${this.$store.state.authToken}`}}).then(
+        this.$http.post(`${process.env.API_ROOT}prompts/`, this.formData, {headers: {Authorization: `Token ${this.$store.state.authToken}`}}).then(
           (response) => {
             // success
-            console.log('success', response)
             this.$store.commit('updateUserPrompt', response.body)
+            this.$router.push('/prompts')
           },
           (response) => {
             // error

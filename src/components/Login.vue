@@ -49,7 +49,7 @@ export default {
     requestAuthToken: function (e) {
       let thisRef = this
       this.usernameError = this.passwordError = ''
-      Vue.http.post('http://localhost:8000/api/token-auth/', {'username': this.username, 'password': this.password}).then(
+      Vue.http.post(`${process.env.API_ROOT}token-auth/`, {'username': this.username, 'password': this.password}).then(
         function (response) {
           thisRef.$store.commit('setAuthToken', response.body.token)
           thisRef.$store.commit('setUser', response.body.user)

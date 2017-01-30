@@ -40,7 +40,7 @@ export default new Vuex.Store({
   },
   actions: {
     getRandomPrompt: (context) => {
-      Vue.http.get('http://localhost:8000/api/prompts/random/').then(
+      Vue.http.get(`${process.env.API_ROOT}prompts/random/`).then(
         function (response) {
           console.log(response)
           context.commit('setCurrentPrompt', response.data)
