@@ -21,7 +21,7 @@
             class="md-raised md-primary"
             @click.stop.prevent="submitPrompt">
               <span v-if="formData.id">Edit</span>
-              <span v-else>Login</span>
+              <span v-else>Add</span>
           </md-button>
         </form>
       </md-card-content>
