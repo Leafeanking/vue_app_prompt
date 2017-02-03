@@ -14,12 +14,15 @@
 
       <md-layout md-align="center">
         <md-card md-card>
-          <md-card-header>
-            <div class="md-title">{{ currentPrompt.name }}</div>
-          </md-card-header>
-          <md-card-content v-if="currentPrompt.description">
-            <p>{{ currentPrompt.description }}</p>
-          </md-card-content>
+          <div v-if="currentPrompt">
+            <md-card-header>
+              <div class="md-title">{{ currentPrompt.name }}</div>
+            </md-card-header>
+            <md-card-content v-if="currentPrompt.description">
+              <p>{{ currentPrompt.description }}</p>
+            </md-card-content>
+          </div>
+          <md-spinner v-else md-indeterminate></md-spinner>
         </md-card>
       </md-layout>
     </md-layout>
